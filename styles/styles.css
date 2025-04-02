@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Gradient background for welcome section */
+.welcome-section {
+    background: linear-gradient(to right, #ee0979, #ff6a00);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+/* Sidebar menu styling */
+.css-1y2bh8b {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Individual card */
+.card {
+    background: rgb(92, 4, 4);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.716);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Hover effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 6px 15px rgba(22, 22, 22, 0.517);
+}
+
+/* Card icon */
+.card i {
+    font-size: 40px;
+    color: #eaff06;
+    margin-bottom: 10px;
+}
+
+/* Card title */
+.card-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Card description */
+.card-desc {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* Section spacing for resume builder */
+.section-spacer {
+    height: 30px;
+}
+
+.subsection-spacer {
+    height: 15px;
+}
+
+/* Divider styling */
+.experience-divider, .education-divider {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px dashed rgba(255, 105, 0, 0.3);
+}
+
+/* Responsive adjustments for different screen sizes */
+@media screen and (max-width: 1200px) {
+    .welcome-section {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .welcome-section {
+        font-size: 30px;
+        padding: 15px;
+    }
+    
+    .card {
+        min-height: 180px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .welcome-section {
+        font-size: 24px;
+    }
+    
+    .card i {
+        font-size: 30px;
+    }
+    
+    .card-title {
+        font-size: 18px;
+    }
+    
+    .card-desc {
+        font-size: 12px;
+    }
+}
+
+/* Make sure columns are responsive */
+[data-testid="column"] {
+    display: flex;
+    align-items: stretch;
+    padding: 0 !important;
+}
+
+/* Ensure proper spacing for content areas */
+.block-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+/* Dashboard styling */
+.stMetric {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Tab styling with increased spacing */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 10px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 40px;
+    white-space: pre-wrap;
+    border-radius: 4px 4px 0 0;
+    gap: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 5px;  /* Added space between tabs */
+}
+
+/* Button styling */
+.stButton > button {
+    background: rgb(83, 3, 3);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
