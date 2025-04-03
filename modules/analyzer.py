@@ -8,7 +8,7 @@ def show_analyzer():
     # Stack elements vertically as requested
     job_role = st.text_input("Job Role You're Applying For")
     
-    job_desc = st.text_area("Job Description (Optional)")
+    job_desc = st.text_area("Job Description")
     
     st.write("Upload your resume (PDF, DOC, DOCX)")
     uploaded_file = st.file_uploader("Max size: 100MB", type=["pdf", "doc", "docx"], accept_multiple_files=False)
