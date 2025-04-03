@@ -2,7 +2,7 @@ import streamlit as st
 
 # Must be the first Streamlit command
 st.set_page_config(
-    page_title="AI-Powered Resume Analyzer",
+    page_title="SmartHire",
     page_icon="📄",
     layout="wide",
     initial_sidebar_state="expanded"

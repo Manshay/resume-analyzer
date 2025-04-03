@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime, timedelta
 import numpy as np
-import time
 import json
 
 # Add to top of file with other exports
@@ -90,8 +89,8 @@ def show_admin_dashboard():
         .sidebar-title {
             text-align: center;
             padding: 15px;
-            background-color: #262730;  /* Dark background to match Streamlit's theme */
-            color: #ffffff;  /* White text */
+            background-color: #262730;
+            color: #ffffff;
             border-radius: 5px;
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -99,12 +98,13 @@ def show_admin_dashboard():
         </style>
         """, unsafe_allow_html=True)
         
-        st.markdown('<div class="sidebar-title">👨‍💼 Admin Panel</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-title">👨‍💼 Admin Dashboard</div>', unsafe_allow_html=True)
         
+        # Updated radio buttons to show only three options in dashboard
         selected = st.radio(
             "",
-            ["📊 Overview", "👥 Users", "📑 Submissions", "📈 Analytics", "⚙️ Settings"],
-            key="admin_nav_radio"  # Added unique key
+            ["📊 Overview", "👥 Users", "📈 Analytics"],
+            key="admin_dashboard_radio"  # Changed key to be more specific
         )
         
         # System status indicators
@@ -118,22 +118,18 @@ def show_admin_dashboard():
             st.markdown("🟡 Cache: 82%")
             st.markdown("🟢 Queue: Ready")
         
-        # Logout button with unique key
+        # Logout button
         st.markdown("---")
         if st.button("🚪 Logout", use_container_width=True, type="primary", key="admin_logout_btn"):
             logout()
 
-    # Main content with keys for each section
+    # Main content with three dashboard sections
     if "Overview" in selected:
         show_enhanced_overview()
     elif "Users" in selected:
         show_enhanced_users()
-    elif "Submissions" in selected:
-        show_enhanced_submissions()
     elif "Analytics" in selected:
         show_enhanced_analytics()
-    elif "Settings" in selected:
-        show_enhanced_settings()
 
 def show_enhanced_overview():
     st.title("Dashboard Overview")
