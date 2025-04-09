@@ -1,6 +1,6 @@
 from docx2pdf import convert
 import streamlit as st
-from ai_modules.resume_generator import ResumeGenerator
+from ai_modules.resume_generator import EnhancedResumeGenerator
 import tempfile
 import os
 import sys
@@ -17,7 +17,11 @@ def show_builder():
     st.title("Resume Builder")
     
     # Template selection
-    template = st.selectbox("Choose a Template", ["Professional", "Creative", "Academic", "Technical"])
+    template = st.selectbox(
+        "Choose a Template",
+        ["Professional", "Creative", "Academic", "Technical"],
+        help="Select a template style for your resume"
+    )
     
     # Create tabs for different sections with increased spacing
     st.markdown('<div class="section-spacer"></div>', unsafe_allow_html=True)
@@ -111,7 +115,7 @@ def show_builder():
                 }
                 
                 # Generate resume
-                generator = ResumeGenerator(template)
+                generator = EnhancedResumeGenerator(template)
                 doc = generator.generate(resume_data)
                 
                 # Create temporary directory
