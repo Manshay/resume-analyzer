@@ -70,15 +70,17 @@ resume-analyzer/
 ├── ai_modules/
 │   ├── ai_analyzer.py
 │   └── resume_generator.py
+├── dashboard_module/
+│   ├── data_fetcher.py
 ├── modules/
-│   ├── analyzer.py
-│   ├── builder.py
-│   ├── dashboard.py
-│   └── feedback.py
+|   ├── admin.py
+|   └── analyzer.py
+|   └── builder.py
+|   └── dashboard.py
+|   └── feedback.py
+|   └── home.py
 ├── styles/
 │   └── styles.css
-├── assets/
-│   └── images/
 ├── app.py
 ├── requirements.txt
 └── README.md
