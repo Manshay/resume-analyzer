@@ -66,7 +66,13 @@ def show_builder():
                 end_date = st.text_input(f"End Date (MM/YYYY or 'Present')", key=f"end_{i}")
             
             responsibilities = st.text_area(f"Key Responsibilities and Achievements", key=f"resp_{i}")
-            experiences.append({"company": company, "title": title, "start": start_date, "end": end_date, "responsibilities": responsibilities})
+            experiences.append({
+                "company": company, 
+                "title": title, 
+                "start": start_date, 
+                "end": end_date, 
+                "responsibilities": responsibilities
+            })
             st.markdown('<hr class="experience-divider">', unsafe_allow_html=True)
     
     with tab4:
@@ -88,7 +94,13 @@ def show_builder():
                 edu_end = st.text_input(f"End Date (MM/YYYY or 'Present')", key=f"edu_end_{i}")
             
             description = st.text_area(f"Description (Optional)", key=f"edu_desc_{i}")
-            education.append({"institution": institution, "degree": degree, "start": edu_start, "end": edu_end, "description": description})
+            education.append({
+                "institution": institution, 
+                "degree": degree, 
+                "start": edu_start, 
+                "end": edu_end, 
+                "description": description
+            })
             st.markdown('<hr class="education-divider">', unsafe_allow_html=True)
     
     with tab5:
@@ -100,32 +112,44 @@ def show_builder():
     if st.button("Generate Resume"):
         with st.spinner("Generating your resume..."):
             try:
-                # Collect all resume data
+                # Validate inputs
+                if not name or not email or not phone or not location:
+                    st.error("Please fill in all required personal information fields.")
+                    return
+                
+                # Collect all resume data in correct format
                 resume_data = {
-                    "name": name,
-                    "email": email,
-                    "phone": phone,
-                    "location": location,
-                    "linkedin": linkedin,
-                    "portfolio": portfolio,
+                    "personal_info": {
+                        "name": name,
+                        "email": email,
+                        "phone": phone,
+                        "location": location,
+                        "linkedin": linkedin,
+                        "portfolio": portfolio
+                    },
                     "summary": summary,
-                    "experiences": experiences,
+                    "experience": experiences,
                     "education": education,
                     "skills": skills
                 }
                 
                 # Generate resume
                 generator = EnhancedResumeGenerator(template)
-                doc = generator.generate(resume_data)
+                success = generator.generate(resume_data)
+                
+                if not success:
+                    st.error("Failed to generate resume. Please check your inputs.")
+                    return
                 
                 # Create temporary directory
                 with tempfile.TemporaryDirectory() as tmp_dir:
                     # Save DOCX
-                    docx_path = os.path.join(tmp_dir, f"{name.replace(' ', '_')}_resume.docx")
-                    doc.save(docx_path)
+                    safe_name = name.replace(' ', '_').replace('/', '_')
+                    docx_path = os.path.join(tmp_dir, f"{safe_name}_resume.docx")
+                    generator.document.save(docx_path)
                     
                     # Try PDF conversion
-                    pdf_path = os.path.join(tmp_dir, f"{name.replace(' ', '_')}_resume.pdf")
+                    pdf_path = os.path.join(tmp_dir, f"{safe_name}_resume.pdf")
                     pdf_conversion_success = convert_to_pdf(docx_path, pdf_path)
                     
                     # Read DOCX file
@@ -138,7 +162,7 @@ def show_builder():
                         with open(pdf_path, 'rb') as pdf_file:
                             pdf_bytes = pdf_file.read()
                 
-                st.success("Resume generated successfully!")
+                st.success("✅ Resume generated successfully!")
                 
                 # Download buttons
                 col1, col2 = st.columns(2)
@@ -146,7 +170,7 @@ def show_builder():
                     st.download_button(
                         label="⬇️ Download DOCX",
                         data=docx_bytes,
-                        file_name=f"{name.replace(' ', '_')}_resume.docx",
+                        file_name=f"{safe_name}_resume.docx",
                         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     )
                 
@@ -155,15 +179,17 @@ def show_builder():
                         st.download_button(
                             label="⬇️ Download PDF",
                             data=pdf_bytes,
-                            file_name=f"{name.replace(' ', '_')}_resume.pdf",
+                            file_name=f"{safe_name}_resume.pdf",
                             mime="application/pdf"
                         )
                     
                     # Show PDF preview
-                    st.subheader("Resume Preview")
-                    st.pdf(pdf_bytes)
+                    st.subheader("📄 Resume Preview")
+                    st.pdf_viewer(pdf_bytes)
                 else:
-                    st.info("PDF preview not available. Please download the DOCX file.")
+                    st.info("💡 PDF preview not available. Please download the DOCX file to view your resume.")
                 
             except Exception as e:
-                st.error(f"An error occurred: {str(e)}")
+                st.error(f"❌ An error occurred: {str(e)}")
+                import traceback
+                st.error(traceback.format_exc())
