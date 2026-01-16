@@ -2,9 +2,7 @@ from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.enum.style import WD_STYLE_TYPE
-from docx.shared import Twips
 import os
-from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)

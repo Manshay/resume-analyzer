@@ -3,7 +3,6 @@ import streamlit as st
 from ai_modules.resume_generator import EnhancedResumeGenerator
 import tempfile
 import os
-import sys
 
 def convert_to_pdf(docx_path, pdf_path):
     try:
